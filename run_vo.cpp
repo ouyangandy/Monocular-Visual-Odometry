@@ -107,6 +107,7 @@ int main(int argc, char **argv)
     // -- Main loop: Iterate through images
     int max_num_imgs_to_proc = basics::Config::get<int>("max_num_imgs_to_proc");
     vector<cv::Mat> cam_pose_history;
+    vector<double > cam_timestamp;
     for (int img_id = 0; img_id < std::min(max_num_imgs_to_proc, (int)image_paths.size()); img_id++)
     {
 
@@ -138,6 +139,7 @@ int main(int argc, char **argv)
         // Return
         // cout << "Finished an image" << endl;
         cam_pose_history.push_back(frame->T_w_c_.clone());
+        cam_timestamp.push_back(frame->time_stamp_);//omh----------------------
         frame->clearNoUsed();
         // if (img_id == 10+3)
         //     break;
@@ -145,8 +147,9 @@ int main(int argc, char **argv)
 
     // Save camera trajectory
     const string save_predicted_traj_to = basics::Config::get<string>("save_predicted_traj_to");
+    const string save_timestamp_to = basics::Config::get<string>("save_timestamp_to");
     vo::writePoseToFile(save_predicted_traj_to, cam_pose_history);
-
+    vo::writeTimestampToFile(save_timestamp_to, cam_timestamp);
     // Wait for user close
     while (!pcl_displayer->isStopped())
         pcl_displayer->spinOnce(10);

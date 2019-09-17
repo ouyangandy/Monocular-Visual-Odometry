@@ -27,7 +27,7 @@ cv::Mat readCameraIntrinsics(const basics::Yaml &config, bool is_print_res = tru
 // Write camera pose to file.
 //      Numbers of each row: x, y, z, 1st row of R, 2nd row of R, 3rd row of R
 void writePoseToFile(const string filename, vector<cv::Mat> list_T);
-
+void writeTimestampToFile(const string filename, vector<double> timestamp);
 // Read pose from file
 //      Numbers of each row: x, y, z, 1st row of R, 2nd row of R, 3rd row of R
 vector<cv::Mat> readPoseFromFile(const string filename);

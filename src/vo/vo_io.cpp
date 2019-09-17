@@ -76,6 +76,24 @@ void writePoseToFile(const string filename, vector<cv::Mat> list_T)
     fout.close();
 }
 
+void writeTimestampToFile(const string filename, vector<double > timestamp)
+{
+    std::ofstream fout;
+    fout.open(filename);
+    if (!fout.is_open())
+    {
+        cout << "my WARNING: failed to store timestamp to  the wrong file name of:" << endl;
+        cout << "    " << filename << endl;
+        return;
+    }
+    for (auto time : timestamp)
+    {
+        fout << time;
+        fout << '\n';
+    }
+    fout.close();
+}
+
 vector<cv::Mat> readPoseFromFile(const string filename)
 {
     // Output
