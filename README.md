@@ -1,4 +1,3 @@
-## omh
 Monocular Visual Odometry
 =======================================
 
